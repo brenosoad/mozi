@@ -94,11 +94,13 @@ body.retrato .pg.L .corte.d,body.retrato .pg.R .corte.e{display:block}
 .cover::before{content:"";pointer-events:none;position:absolute;inset:5cqw;border:.35cqw dashed rgba(233,207,143,.55);border-radius:1.5cqw}
 .cover::after{background:linear-gradient(to right,rgba(0,0,0,.45),rgba(255,255,255,.07) 3cqw,transparent 9cqw)!important}
 .foil{background:linear-gradient(135deg,#fbeab5,#c99a45 40%,#f4dc92 58%,#a97c30);-webkit-background-clip:text;background-clip:text;color:transparent}
-.cover .selo{width:21cqw;height:21cqw;border:.4cqw solid rgba(201,154,69,.75);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:7cqw}
-.cover .selo svg{width:9cqw;height:9cqw;fill:#d9b565}
+.cover .selo{width:18cqw;height:18cqw;border:.4cqw solid rgba(201,154,69,.75);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:5.5cqw}
+.cover .selo svg{width:7.8cqw;height:7.8cqw;fill:#d9b565}
 .cover .mono{font-family:var(--serif);font-size:13cqw;line-height:1;letter-spacing:.6cqw}
-.cover .verso .orn,.cover.verso .orn{margin:5cqw 0}
-.cover .frase{font-family:var(--hand);font-weight:600;font-size:6.6cqw;color:#e9cf8f;opacity:.9}
+.cover .verso .orn,.cover.verso .orn{margin:4cqw 0 6cqw}
+.cover .texto{max-width:64cqw;margin-bottom:6cqw;font-family:var(--serif);font-style:italic;font-size:4.3cqw;
+  line-height:1.72;text-align:center;color:rgba(240,221,178,.88);text-wrap:balance}
+.cover .frase{font-family:var(--hand);font-weight:600;font-size:6.4cqw;color:#e9cf8f;opacity:.92}
 .cover .vdt{position:absolute;bottom:10cqw;font-size:2.4cqw;letter-spacing:1cqw}
 .cover .borda{position:absolute;top:1%;bottom:1%;width:calc(var(--pb,2.4cqw) * 1.12);z-index:11;pointer-events:none;
   background-image:
@@ -398,6 +400,7 @@ const contra = `<div class="page" data-density="hard"><div class="pg cover verso
   <span class="selo"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
   <span class="mono foil" data-k="verso-mono">${n1[0]} &amp; ${n2[0]}</span>
   <span class="orn"><i></i><b></b><i></i></span>
+  <span class="texto" data-k="verso-txt">Guardei aqui os nossos dois primeiros meses. O resto a gente preenche junto, uma foto de cada vez.</span>
   <span class="frase" data-k="verso-frase">feito à mão, pra você</span>
   <span class="vdt foil" data-k="verso-dt">${dataPontos}</span></div></div>`;
 
