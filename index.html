@@ -60,6 +60,12 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .cover::before{content:"";pointer-events:none;position:absolute;inset:5cqw;border:.35cqw dashed rgba(233,207,143,.55);border-radius:1.5cqw}
 .cover::after{background:linear-gradient(to right,rgba(0,0,0,.45),rgba(255,255,255,.07) 3cqw,transparent 9cqw)!important}
 .foil{background:linear-gradient(135deg,#fbeab5,#c99a45 40%,#f4dc92 58%,#a97c30);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .selo{width:21cqw;height:21cqw;border:.4cqw solid rgba(201,154,69,.75);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:7cqw}
+.cover .selo svg{width:9cqw;height:9cqw;fill:#d9b565}
+.cover .mono{font-family:var(--serif);font-size:13cqw;line-height:1;letter-spacing:.6cqw}
+.cover .verso .orn,.cover.verso .orn{margin:5cqw 0}
+.cover .frase{font-family:var(--hand);font-weight:600;font-size:6.6cqw;color:#e9cf8f;opacity:.9}
+.cover .vdt{position:absolute;bottom:10cqw;font-size:2.4cqw;letter-spacing:1cqw}
 .cover .borda{position:absolute;top:1%;bottom:1%;width:2.4cqw;z-index:11;pointer-events:none;
   background-image:
     repeating-linear-gradient(to bottom,rgba(112,84,50,.34) 0 .12cqw,rgba(112,84,50,0) .12cqw .46cqw),
@@ -320,6 +326,7 @@ const MESES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov'
 const dataLonga = d0.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
 const dataCurta = `${d0.getDate()} ${MESES[d0.getMonth()]}`;
 const ano = d0.getFullYear();
+const dataPontos = `${String(d0.getDate()).padStart(2,'0')} . ${String(d0.getMonth()+1).padStart(2,'0')} . ${ano}`;
 
 const HEART = c => `<svg class="${c}" viewBox="0 0 24 24"><path class="heart" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 const IM = f => `<div class="im"><img src="${f.src}" alt="${f.legenda || ''}" style="object-position:${f.pos || '50% 50%'}"></div>`;
@@ -350,7 +357,12 @@ const capa = `<div class="page" data-density="hard"><div class="pg cover frente"
   <span class="orn"><i></i><b></b><i></i></span>
   <h1 class="foil"><span data-k="capa-n1">${n1}</span><i data-k="capa-amp">&amp;</i><span data-k="capa-n2">${n2}</span></h1><div class="tt foil" data-k="capa-tt">Nosso álbum</div><span class="curl"></span>
   <span class="dt foil" data-k="capa-dt">${dataLonga}</span></div></div>`;
-const contra = `<div class="page" data-density="hard"><div class="pg cover verso"><span class="borda"></span>${HEART_GOLD}</div></div>`;
+const contra = `<div class="page" data-density="hard"><div class="pg cover verso"><span class="borda"></span>
+  <span class="selo"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+  <span class="mono foil" data-k="verso-mono">${n1[0]} &amp; ${n2[0]}</span>
+  <span class="orn"><i></i><b></b><i></i></span>
+  <span class="frase" data-k="verso-frase">feito à mão, pra você</span>
+  <span class="vdt foil" data-k="verso-dt">${dataPontos}</span></div></div>`;
 
 const inner = CONFIG.paginas.concat([{ id: 'fim', t: 'fim' }]).map((p, i) => (R[p.t] || R.vazio)(p, p.id || 'p' + i));
 if ((inner.length + 2) % 2) inner.unshift(R.vazio());
@@ -405,7 +417,7 @@ function medir(el){
   else if (el.tagName === 'SPAN' && el.closest('.tl li')){ el.classList.toggle('m', n > 30 && n <= 46); el.classList.toggle('lg', n > 46); }
 }
 campos().forEach(el => { el.dataset.v = el.innerText; medir(el); });
-const TEXTOS = {"beijo-cap": "Um beijinho pra tirar o nervosismo das costas","beijo-dt": "ELA DISSE SIM!","caixinha-cap": "Finalmente, você não me negou, minha namoradona","caretas-pc2": "Dois denguinhos meu","carta-h": "Mozinho,","carta-par1": "Obrigado por cada risada, cada abraço e por deixar meus dias mais felizes.","carta-par2": "Eu te amo e te vivo.","carta-sg": "Bezinho","chapeu-pc1": "Você é muito denguinho meu","date-cap": "Nosso primeiro date","ded-sg": "Bezinho","fim-sel": "Be e naly","hist-t-date": "Nosso primeiro date, pra mim já tava casado ali.","hist-t-pedido": "O dia do primeiro sim","nota-tit": "Amor da minha vida","nota-txt": "Cada dia ao seu lado é mágico, cada momento, cada risada, cada beijo, cada abraço, cada toque. Você é simplesmente sensacional. Te amo todos os dias. Que nosso amor floresça e não tenha fim.","rio-pc0": "Nosso primeiro passeio juntos","rio-pc1": "Cheirando seu fedozinho sem banho","sorriso-cap": "E eu sempre amo esse seu sorriso...","terra-pc0": "Eu e você (E o fred)","viagem-pc0": "Nossa primeira viagem juntos","viagem-pc1": "Do nada um parque em Olimpia"};
+const TEXTOS = {"beijo-cap": "Um beijinho pra tirar o nervosismo das costas", "beijo-dt": "ELA DISSE SIM!", "caixinha-cap": "Finalmente, você não me negou, minha namoradona", "caretas-pc2": "Dois denguinhos meu", "carta-h": "Mozinho,", "carta-par1": "Obrigado por cada risada, cada abraço e por deixar meus dias mais felizes.", "carta-par2": "Eu te amo e te vivo.", "carta-sg": "Bezinho", "chapeu-pc1": "Você é muito denguinho meu", "date-cap": "Nosso primeiro date", "ded-sg": "Bezinho", "fim-sel": "Be e naly", "hist-t-date": "Nosso primeiro date, pra mim já tava casado ali.", "hist-t-pedido": "O dia do primeiro sim", "nota-tit": "Amor da minha vida", "nota-txt": "Cada dia ao seu lado é mágico, cada momento, cada risada, cada beijo, cada abraço, cada toque. Você é simplesmente sensacional. Te amo todos os dias. Que nosso amor floresça e não tenha fim.", "rio-pc0": "Nosso primeiro passeio juntos", "rio-pc1": "Cheirando seu fedozinho sem banho", "sorriso-cap": "E eu sempre amo esse seu sorriso...", "terra-pc0": "Eu e você (E o fred)", "viagem-pc0": "Nossa primeira viagem juntos", "viagem-pc1": "Do nada um parque em Olimpia"};
 campos().forEach(el => { const v = TEXTOS[el.dataset.k]; if (typeof v === 'string'){ el.textContent = v; el.dataset.v = v; medir(el); } });
 document.addEventListener('input', e => { const el = e.target.closest && e.target.closest('[data-k]'); if (el) medir(el); });
 
