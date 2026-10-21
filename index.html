@@ -49,12 +49,15 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .pg.R::after{background:linear-gradient(to right,
   rgba(52,30,12,.5) 0,rgba(70,43,18,.34) 1.4cqw,rgba(80,50,20,.14) 5cqw,
   rgba(255,250,236,.17) 10cqw,rgba(255,250,236,.06) 15cqw,rgba(255,250,236,0) 21cqw)}
-.pg.L::before,.pg.R::before{content:"";position:absolute;top:0;bottom:0;width:1.7cqw;z-index:10;pointer-events:none;
+.corte{position:absolute;top:0;bottom:0;z-index:10;pointer-events:none;
   background-image:
     repeating-linear-gradient(to bottom,rgba(118,88,52,.3) 0 .1cqw,rgba(118,88,52,0) .1cqw .4cqw),
-    linear-gradient(to var(--corte),rgba(74,50,28,.55),rgba(236,225,205,.92) 46%,rgba(222,206,178,.98))}
-.pg.L::before{left:0;--corte:left}
-.pg.R::before{right:0;--corte:right}
+    linear-gradient(to var(--lado),rgba(74,50,28,.55),rgba(236,225,205,.92) 46%,rgba(222,206,178,.98))}
+.corte.e{left:0;--lado:left;width:var(--pe,1.7cqw)}
+.corte.d{right:0;--lado:right;width:var(--pd,1.7cqw)}
+.pg.L .corte.d,.pg.R .corte.e,.cover .corte{display:none}
+body.retrato .pg.L .corte.d,body.retrato .pg.R .corte.e{display:block}
+.corte,.cover .borda{transition:width .5s ease}
 .guarda{background:
     radial-gradient(circle at 50% 50%,rgba(155,44,64,.17) 0 .85cqw,rgba(155,44,64,0) .95cqw) 0 0/11cqw 11cqw,
     radial-gradient(circle at 50% 50%,rgba(201,154,69,.2) 0 .5cqw,rgba(201,154,69,0) .6cqw) 5.5cqw 5.5cqw/11cqw 11cqw,
@@ -85,12 +88,12 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .cover .verso .orn,.cover.verso .orn{margin:5cqw 0}
 .cover .frase{font-family:var(--hand);font-weight:600;font-size:6.6cqw;color:#e9cf8f;opacity:.9}
 .cover .vdt{position:absolute;bottom:10cqw;font-size:2.4cqw;letter-spacing:1cqw}
-.cover .borda{position:absolute;top:1%;bottom:1%;width:2.4cqw;z-index:11;pointer-events:none;
+.cover .borda{position:absolute;top:1%;bottom:1%;width:calc(var(--pb,2.4cqw) * 1.12);z-index:11;pointer-events:none;
   background-image:
     repeating-linear-gradient(to bottom,rgba(112,84,50,.34) 0 .12cqw,rgba(112,84,50,0) .12cqw .46cqw),
     linear-gradient(to right,rgba(42,9,17,.9),rgba(226,213,189,.95) 40%,rgba(190,168,133,1))}
-.cover.frente .borda{right:0;border-radius:0 .5cqw .5cqw 0}
-.cover.verso .borda{left:0;border-radius:.5cqw 0 0 .5cqw;transform:scaleX(-1)}
+.cover.frente .borda{--pb:var(--pd,2.4cqw);right:0;border-radius:0 .5cqw .5cqw 0}
+.cover.verso .borda{--pb:var(--pe,2.4cqw);left:0;border-radius:.5cqw 0 0 .5cqw;transform:scaleX(-1)}
 .cover.frente{box-shadow:inset -.5cqw 0 1.4cqw rgba(0,0,0,.3)}
 .cover .orn{pointer-events:none;display:flex;align-items:center;gap:2.2cqw;margin-bottom:4.5cqw;opacity:.75}
 .cover .orn i{display:block;width:12cqw;height:.18cqw;background:#c99a45}
@@ -391,7 +394,8 @@ if ((inner.length + 2) % 2) inner.unshift(R.vazio());
 $('book').innerHTML = [capa, ...inner.map(h => `<div class="page">${h}</div>`), contra].join('');
 
 const els = [...$('book').querySelectorAll('.page')];
-els.forEach(el => el.querySelector('.pg').insertAdjacentHTML('beforeend', '<span class="luz"></span>'));
+els.forEach(el => el.querySelector('.pg').insertAdjacentHTML('beforeend',
+  '<span class="corte e"></span><span class="corte d"></span><span class="luz"></span>'));
 els.forEach((el, i) => {
   if (i === 0 || i === els.length - 1) return;
   const pg = el.querySelector('.pg');
@@ -412,7 +416,19 @@ function upd(){
   const i = pf.getCurrentPageIndex();
   $('pos').textContent = i === 0 ? 'Capa' : (i >= total - 1 ? 'Fim' : `${i} / ${total - 2}`);
 }
-pf.on('flip', () => { document.body.classList.add('aberto'); upd(); }); upd();
+const livro = $('book'), NPG = els.length;
+function pilhas(){
+  const i = pf.getCurrentPageIndex();
+  const larg = v => (0.35 + 2.55 * Math.max(0, Math.min(1, v / (NPG - 1)))).toFixed(2) + 'cqw';
+  livro.style.setProperty('--pe', larg(i));
+  livro.style.setProperty('--pd', larg(NPG - 1 - i));
+  const w = livro.querySelector('.stf__wrapper');
+  document.body.classList.toggle('retrato', !!w && w.className.indexOf('--portrait') > -1);
+}
+pf.on('flip', () => { document.body.classList.add('aberto'); upd(); pilhas(); });
+pf.on('changeOrientation', pilhas);
+addEventListener('resize', pilhas);
+upd(); pilhas();
 $('next').onclick = () => pf.flipNext();
 $('prev').onclick = () => pf.flipPrev();
 $('home').onclick = () => pf.flip(0);
