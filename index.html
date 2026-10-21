@@ -64,7 +64,7 @@ body.retrato .pg.L .corte.d,body.retrato .pg.R .corte.e{display:block}
     repeating-linear-gradient(45deg,rgba(120,90,55,.13) 0 .22cqw,rgba(120,90,55,0) .22cqw 7.78cqw),
     repeating-linear-gradient(-45deg,rgba(120,90,55,.13) 0 .22cqw,rgba(120,90,55,0) .22cqw 7.78cqw),
     var(--noise),#efe3cd}
-.guarda .pn{display:none}
+.guarda .cab,.guarda .rod{display:none}
 .guarda .gs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26cqw;height:26cqw;border-radius:50%;
   background:#efe3cd;box-shadow:0 0 0 .35cqw rgba(155,44,64,.3),0 0 0 1.6cqw #efe3cd,0 0 0 1.95cqw rgba(201,154,69,.35);
   display:flex;align-items:center;justify-content:center}
@@ -73,7 +73,19 @@ body.retrato .pg.L .corte.d,body.retrato .pg.R .corte.e{display:block}
   background:linear-gradient(176deg,rgba(255,252,242,.14) 0,rgba(255,252,242,.04) 16%,rgba(255,252,242,0) 40%,
     rgba(46,28,12,.045) 74%,rgba(46,28,12,.13) 100%)}
 .cover .luz{background:linear-gradient(176deg,rgba(255,240,205,.13) 0,rgba(255,240,205,.03) 20%,rgba(0,0,0,0) 46%,rgba(0,0,0,.1) 78%,rgba(0,0,0,.22) 100%)}
-.pn{position:absolute;bottom:4cqw;left:0;right:0;text-align:center;font-family:var(--serif);font-size:2.6cqw;color:var(--muted);z-index:2}
+.cab{position:absolute;top:4.6cqw;left:0;right:0;text-align:center;z-index:7;pointer-events:none;
+  font-size:2.05cqw;letter-spacing:.82cqw;text-transform:uppercase;color:rgba(141,122,104,.9)}
+.cab b{font-weight:500;pointer-events:auto}
+.cab::after{content:"";display:block;width:17cqw;height:.12cqw;background:rgba(141,122,104,.5);margin:1.5cqw auto 0}
+.rod{position:absolute;bottom:3.4cqw;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:2.4cqw;z-index:7;pointer-events:none}
+.rod i{display:block;width:.95cqw;height:.95cqw;background:rgba(155,44,64,.5);transform:rotate(45deg)}
+.rod b{font-family:var(--serif);font-weight:400;font-size:2.9cqw;color:var(--muted)}
+.ff .cab{color:rgba(247,237,220,.85);text-shadow:0 .2cqw .9cqw rgba(0,0,0,.65)}
+.ff .cab::after{background:rgba(247,237,220,.45)}
+.ff .rod b{color:rgba(247,237,220,.8);text-shadow:0 .2cqw .9cqw rgba(0,0,0,.65)}
+.ff .rod i{background:rgba(237,185,164,.75)}
+.ff .scrim{position:absolute;left:0;right:0;top:0;height:24cqw;z-index:4;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(22,12,7,.6),rgba(22,12,7,.22) 45%,rgba(22,12,7,0))}
 .hand{font-family:var(--hand);font-weight:600}
 .heart{fill:var(--red)}
 
@@ -178,18 +190,18 @@ body.aberto .curl{display:none}
 .pol .pc.lg{font-size:4cqw}
 .pol .in{width:100%;height:100%}
 .f2 .pol{width:42cqw;height:68cqw}
-.f2 .pol:nth-child(1){left:6cqw;top:12cqw;transform:rotate(-3deg)}
-.f2 .pol:nth-child(2){right:6cqw;top:58cqw;transform:rotate(2.5deg)}
+.f2 .pol:nth-child(1){left:6cqw;top:15cqw;transform:rotate(-3deg)}
+.f2 .pol:nth-child(2){right:6cqw;top:60cqw;transform:rotate(2.5deg)}
 .f3 .pol{width:44cqw;height:58cqw}
-.f3 .pol:nth-child(1){left:5cqw;top:6cqw;transform:rotate(-4deg)}
-.f3 .pol:nth-child(2){right:5cqw;top:32cqw;transform:rotate(3.5deg);z-index:2}
+.f3 .pol:nth-child(1){left:5cqw;top:14cqw;transform:rotate(-4deg)}
+.f3 .pol:nth-child(2){right:5cqw;top:38cqw;transform:rotate(3.5deg);z-index:2}
 .f3 .pol:nth-child(3){left:14cqw;top:72cqw;transform:rotate(-2deg);z-index:3}
 
 /* bilhete */
 .note{background:
   linear-gradient(90deg,transparent 12cqw,rgba(200,70,80,.45) 12cqw,rgba(200,70,80,.45) 12.4cqw,transparent 12.4cqw),
   repeating-linear-gradient(transparent 0 8.6cqw,rgba(90,130,170,.35) 8.6cqw 8.9cqw),var(--noise),#f8f1e3;
-  background-position:0 0,0 7cqw,0 0,0 0;padding:7cqw 9cqw 0 17cqw}
+  background-position:0 0,0 11cqw,0 0,0 0;padding:11cqw 9cqw 0 17cqw}
 .note .hand{font-size:7.4cqw;line-height:8.9cqw;white-space:pre-line;color:#2a3a5a;display:block;margin-top:1.5cqw}
 .note h3{font-family:var(--hand);font-weight:600;font-size:8cqw;line-height:8.9cqw;color:var(--red)}
 .note .sticker{position:absolute;right:9cqw;bottom:12cqw;width:16cqw;height:16cqw;transform:rotate(-10deg)}
@@ -359,7 +371,7 @@ const A = (k, r) => `data-k="${k}-${r}"`;
 const POL = (f, j, i) => `<div class="pol"><span class="tape ${j % 2 ? 't2' : 't1'}"></span><div class="in">${IM(f)}</div><div class="pc" ${A(i, 'pc' + j)}>${f.legenda || ''}</div></div>`;
 
 const R = {
-  fotoFull: (p, i) => { const f = p.fotos[0]; return `<div class="pg ff">${IM(f)}<div class="ov"><span class="hand" ${A(i, 'cap')}>${f.legenda || ''}</span><small ${A(i, 'dt')}>${f.data || ''}</small></div></div>`; },
+  fotoFull: (p, i) => { const f = p.fotos[0]; return `<div class="pg ff">${IM(f)}<span class="scrim"></span><div class="ov"><span class="hand" ${A(i, 'cap')}>${f.legenda || ''}</span><small ${A(i, 'dt')}>${f.data || ''}</small></div></div>`; },
   fotos: (p, i) => (R['foto' + Math.min(3, p.fotos.length)] || R.foto1)(p, i),
   dedic: (p, i) => `<div class="pg dedic">${HEART('')}<span class="hand" ${A(i, 'para')}>Para</span><h2 ${A(i, 'nome')}>${n2}</h2><span class="rule"></span><p ${A(i, 'ded')}>com todo o meu amor,</p><span class="hand sg" ${A(i, 'sg')}>${n1}</span></div>`,
   contador: (p, i) => `<div class="pg cnt"><div class="stamp"><span ${A(i, 'st')}>desde</span><b ${A(i, 'sd')}>${dataCurta}</b><span ${A(i, 'sa')}>${ano}</span></div>
@@ -400,7 +412,8 @@ els.forEach((el, i) => {
   if (i === 0 || i === els.length - 1) return;
   const pg = el.querySelector('.pg');
   pg.classList.add(i % 2 ? 'L' : 'R');
-  pg.insertAdjacentHTML('beforeend', `<span class="pn">${i}</span>`);
+  pg.insertAdjacentHTML('beforeend',
+    `<span class="cab"><b data-k="cabecalho">${n1} &amp; ${n2}</b></span><span class="rod"><i></i><b>${i}</b><i></i></span>`);
 });
 
 const pf = new St.PageFlip($('book'), {
@@ -487,7 +500,7 @@ document.addEventListener('focusout', async e => {
   const v = el.innerText.replace(/\s+$/, '');
   if (v === el.dataset.v) return;
   if (!v.trim()){ el.textContent = el.dataset.v; return; }
-  el.dataset.v = v;
+  document.querySelectorAll(`[data-k="${el.dataset.k}"]`).forEach(o => { o.dataset.v = v; if (o !== el) o.textContent = v; });
   try { await loja.doc('textos/' + el.dataset.k).set({ v }); avisar('Texto salvo'); }
   catch (err) { avisar('Não deu para salvar agora', true); }
 });
@@ -502,12 +515,14 @@ document.addEventListener('focusout', async e => {
   if (!db) return;
   db.collection('textos').onSnapshot(s => {
     s.docs.forEach(d => {
-      const el = document.querySelector(`[data-k="${d.id}"]`);
       const v = d.data() && d.data().v;
-      if (!el || typeof v !== 'string' || el === document.activeElement) return;
-      el.dataset.v = v;
-      if (el.innerText !== v) el.textContent = v;
-      medir(el);
+      if (typeof v !== 'string') return;
+      document.querySelectorAll(`[data-k="${d.id}"]`).forEach(el => {
+        if (el === document.activeElement) return;
+        el.dataset.v = v;
+        if (el.innerText !== v) el.textContent = v;
+        medir(el);
+      });
     });
   }, () => {});
   const user = await window.claude?.use?.('user');
