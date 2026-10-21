@@ -51,6 +51,17 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
     linear-gradient(to var(--corte),rgba(74,50,28,.55),rgba(236,225,205,.92) 46%,rgba(222,206,178,.98))}
 .pg.L::before{left:0;--corte:left}
 .pg.R::before{right:0;--corte:right}
+.guarda{background:
+    radial-gradient(circle at 50% 50%,rgba(155,44,64,.17) 0 .85cqw,rgba(155,44,64,0) .95cqw) 0 0/11cqw 11cqw,
+    radial-gradient(circle at 50% 50%,rgba(201,154,69,.2) 0 .5cqw,rgba(201,154,69,0) .6cqw) 5.5cqw 5.5cqw/11cqw 11cqw,
+    repeating-linear-gradient(45deg,rgba(120,90,55,.13) 0 .22cqw,rgba(120,90,55,0) .22cqw 7.78cqw),
+    repeating-linear-gradient(-45deg,rgba(120,90,55,.13) 0 .22cqw,rgba(120,90,55,0) .22cqw 7.78cqw),
+    var(--noise),#efe3cd}
+.guarda .pn{display:none}
+.guarda .gs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26cqw;height:26cqw;border-radius:50%;
+  background:#efe3cd;box-shadow:0 0 0 .35cqw rgba(155,44,64,.3),0 0 0 1.6cqw #efe3cd,0 0 0 1.95cqw rgba(201,154,69,.35);
+  display:flex;align-items:center;justify-content:center}
+.guarda .gs svg{width:10cqw;height:10cqw;fill:rgba(155,44,64,.45)}
 .pn{position:absolute;bottom:4cqw;left:0;right:0;text-align:center;font-family:var(--serif);font-size:2.6cqw;color:var(--muted);z-index:2}
 .hand{font-family:var(--hand);font-weight:600}
 .heart{fill:var(--red)}
@@ -348,7 +359,7 @@ const R = {
   marcos: (p, i) => `<div class="pg tl${p.itens.length > 4 ? ' muitos' : ''}"><h3 ${A(i, 'tit')}>${p.titulo || 'Nossa história'}</h3><span class="fio"><i></i><b></b><i></i></span><ul>${p.itens.map((m, j) => `<li><b ${A(i, 'd-' + (m.id || j))}>${m.data}</b><span ${A(i, 't-' + (m.id || j))}>${m.texto}</span></li>`).join('')}</ul></div>`,
   carta: (p, i) => `<div class="pg ltr"><h3 ${A(i, 'h')}>${n2},</h3>${p.data ? `<small class="ld" ${A(i, 'dt')}>${p.data}</small>` : ''}${p.paragrafos.map((x, j) => `<p ${A(i, 'par' + j)}>${x}</p>`).join('')}<div class="sg" ${A(i, 'sg')}>${n1}</div></div>`,
   fim: (p, i) => `<div class="pg fim">${HEART('')}<div class="hand" ${A(i, 'h')}>Te amo</div><p ${A(i, 'p')}>e que venham os próximos capítulos</p><span class="sel" ${A(i, 'sel')}>${n1} &amp; ${n2} · desde ${dataLonga}</span></div>`,
-  vazio: () => `<div class="pg"></div>`
+  vazio: () => `<div class="pg guarda"><span class="gs"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span></div>`
 };
 
 const HEART_GOLD = `<svg class="em" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
